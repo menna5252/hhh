@@ -1,16 +1,16 @@
-import React from 'react'
-import Navbar from '../Navbar/Navbar'
-import { Outlet } from 'react-router-dom'
-import Footer from '../Footer/Footer'
+import { Outlet } from "react-router-dom";
+import Navbar from "../Navbar/Navbar"; 
+import Footer from "../Footer/Footer"; 
 
-export default function Layout() {
+const Layout = ({ setQuery }) => {
   return (
-    <>
-    <Navbar/>
-    <div className="container mx-auto my-6  pt-[60px] pb-6">
-    <Outlet/>
+    <div className="flex flex-col min-h-screen justify-between">
+      <Navbar setQuery={setQuery} />
+      <div className="flex-grow">
+        <Outlet />
+      </div>
+      <Footer />
     </div>
-    <Footer/>
-    </>
-  )
-}
+  );
+};
+export default Layout;

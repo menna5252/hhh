@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-const RecipeCard = ({ recipe, toggleFavourite, isFavourite }) => {
+const RecipeCard = ({ recipe, toggleFavourite, isFavourite ,onRemove,Icon}) => {
   const [showModal, setShowModal] = useState(false);
- console.log(recipe);
+
  
   return (
-    <div className="bg-white shadow-md rounded-md overflow-hidden relative">
+    <div className="bg-gray-100 dark:bg-gray-500 shadow-md rounded-md overflow-hidden relative">
       <img
         src={recipe.image_url}
         alt={recipe.title}
@@ -15,7 +15,7 @@ const RecipeCard = ({ recipe, toggleFavourite, isFavourite }) => {
       <div className="p-4">
         <h2 className="text-lg font-bold">{recipe.title}</h2>
         <button
-          onClick={() => toggleFavourite(recipe)}
+          onClick={()=>{toggleFavourite(recipe);onRemove(recipe);}}
           className={`absolute bottom-2 right-2 ${
             isFavourite ? "text-red-500" : "text-black"
           }`}
@@ -24,10 +24,10 @@ const RecipeCard = ({ recipe, toggleFavourite, isFavourite }) => {
         </button>
       </div>
 
-      {/* Modal لعرض تفاصيل الوصفة */}
+  
       {showModal && (
         <div className="z-[1000] fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-md w-11/12 max-w-md">
+          <div className="bg-white dark:bg-gray-300 p-6 rounded-md w-11/12 max-w-md">
             <h3 className="text-xl font-bold mb-4">{recipe.title}</h3>
             <img
               src={recipe.image_url}

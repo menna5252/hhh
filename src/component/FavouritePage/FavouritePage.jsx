@@ -1,27 +1,39 @@
-const FavouritesPage = ({ favourites }) => {
-    
-    return (
-      <main className="p-8">
-        <h1 className="text-3xl font-bold mb-6">Your Favourites</h1>
-        {favourites.length === 0 ? (
-          <p>No favourites added yet!</p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {favourites.map((recipe) => (
-              <div key={recipe.id} className="bg-white shadow-md rounded-md overflow-hidden">
-                <img
-                  src={recipe.image_url}
-                  alt={recipe.title}
-                  className="w-full h-40 object-cover"
-                />
-                <div className="p-4">
-                  <h2 className="text-lg font-bold">{recipe.title}</h2>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </main>
-    );
+import { useEffect, useState } from "react";
+import RecipeCard from "../RecipeCard/RecipeCard";
+
+const FavouritePage = () => {
+  const [favourites, setFavourites] = useState([]);
+
+  useEffect(() => {
+    const storedFavourites = JSON.parse(localStorage.getItem("favourites")) || [];
+    setFavourites(storedFavourites);
+  }, []);
+
+  const removeFromFavourites = (recipe) => {
+    const updatedFavourites = favourites.filter((fav) => fav.id !== recipe.id);
+    setFavourites(updatedFavourites);
+    localStorage.setItem("favourites", JSON.stringify(updatedFavourites));
   };
-  export default FavouritesPage;
+
+  return (
+    <div>
+      <h1 className="text-center py-4 text-2xl font-bold dark:text-white">Your Favourites</h1>
+      {favourites.length === 0 ? (
+        <p className="dark:text-white ps-5">No favourite recipes yet.</p>
+      ) : (
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 container px-8 pb-10">
+          {favourites.map((recipe) => (
+            <RecipeCard
+              key={recipe.id}
+              recipe={recipe}
+              isFavourite={true}
+              toggleFavourite={()=>{return;}}
+              onRemove={() => removeFromFavourites(recipe)}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+export default FavouritePage;

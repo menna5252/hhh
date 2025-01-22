@@ -7,7 +7,8 @@ const RecipeList = ({ recipes, toggleFavourite, favourites }) => {
             key={recipe.id}
             recipe={recipe}
             toggleFavourite={toggleFavourite}
-            isFavourite={favourites.some((fav) => fav.id === recipe.id)} // تحقق من حالة المفضلة
+            isFavourite={favourites.some((fav) => fav.id === recipe.id)}
+            onRemove={()=>{return;}}
           />
         ))}
       </div>
