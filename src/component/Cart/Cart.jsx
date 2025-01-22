@@ -1,0 +1,11 @@
+import React, { useState,useEffect } from 'react'
+
+export default function Cart() {
+  
+  return (
+    <>
+    <h2>Cart</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, facilis eius similique architecto itaque sit eos ducimus aut nemo cupiditate?</p>
+    </>
+  )
+}
